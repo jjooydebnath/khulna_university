@@ -1,8 +1,9 @@
 <nav class="navbar bg-body-tertiary">
     <div class="container">
       <a class="navbar-brand"></a>
-      <form class="d-flex" role="search">
-        <button class="btn btn-outline-secondary" type="submit">Login</button>
-      </form>
+      <div class="">
+        <a href="{% url 'login' %}" class="btn btn-outline-secondary">User Login</a>
+        <a href="{% url 'login' %}" class="btn btn-outline-danger">Admin/ Super Admin Login</a>
+      </div>
     </div>
   </nav>

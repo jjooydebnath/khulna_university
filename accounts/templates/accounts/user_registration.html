@@ -1,0 +1,175 @@
+{% extends 'accounts/base.html' %}
+{% block title %} Login {% endblock %}
+{% block content %}
+<div class="container">
+    <div class="">
+        <a href="{% url 'home' %}" class="btn btn-warning">back</a>
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col">
+
+        </div>
+
+        <div class="col">
+            <div class="card" style="width: 50rem;">
+                
+                <div class="container" style="margin: 15px 0 0 0;">
+                    <h3 class="card-title text-center">Pharmacy Alumni Association</h3>
+                    <h5 class="card-text text-center">Membership Application</h5>
+                    <br>
+                    <form method="POST" action="">
+                      {% csrf_token %}
+                        <div class="">
+                            <h4>Personal Information</h4>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                              {{ userregisterform.full_name }}
+                            </div>
+                          </div>
+                          <br>
+
+                          <div class="row">
+                            <div class="col">
+                              {{ userinfoform.b_pharm_roll_no.label }}
+                              {{ userinfoform.b_pharm_roll_no }}
+                            </div>
+                            <div class="col">
+                              {{ userinfoform.m_pharm_roll_no.label }}
+                              {{ userinfoform.m_pharm_roll_no }}
+                              </div>
+                          </div>
+                          <br>
+
+                          <div class="row">
+                            <div class="col">
+                              {{ userinfoform.date_of_birth.label }}
+                              {{ userinfoform.date_of_birth }}
+                            </div>
+                            <div class="col">
+                              {{ userinfoform.blood_group.label }}
+                              {{ userinfoform.blood_group }}
+                              </div>
+                          </div>
+                          <br>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                  {{ userregisterform.email.label }}
+                                  {{ userregisterform.email }}
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                  {{ userregisterform.mobile_number.label }}
+                                  {{ userregisterform.mobile_number }}
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+
+                        <div class="row">
+                            <div class="col">
+                              {{ userinfoform.name_of_spouse.label }}
+                              {{ userinfoform.name_of_spouse }}
+                            </div>
+                            <div class="col">
+                              {{ userinfoform.marriage_date.label }}
+                              {{ userinfoform.marriage_date }}
+                              </div>
+                          </div>
+                          <br>
+
+                          <div class="row">
+                            <div class="col">
+                              {{ userinfoform.no_of_kids.label }}
+                              {{ userinfoform.no_of_kids }}
+                            </div>
+                            <div class="col">
+                              {{ userinfoform.hobbies.label }}
+                              {{ userinfoform.hobbies }}
+                              </div>
+                          </div>
+                          <br>
+
+                          <div class="row">
+                            <div class="col">
+                              {{ userregisterform.password1.label }}
+                              {{ userregisterform.password1 }}
+                            </div>
+                            <div class="col">
+                              {{ userregisterform.password2.label }}
+                              {{ userregisterform.password2 }}
+                              </div>
+                          </div>
+                          <br>
+
+                          <div class="row">
+                            <div class="col">
+                              {{ userinfoform.present_address.label }}
+                              {{ userinfoform.present_address }}
+                            </div>
+                          </div>
+                          <br>
+
+                          <div class="row">
+                            <div class="col">
+                              {{ userinfoform.permanent_address.label }}
+                              {{ userinfoform.permanent_address }}
+                            </div>
+                          </div>
+                          <br>
+
+                          <div class="">
+                            <h4>Professional Information</h4>
+                          </div>
+
+                          <div class="row">
+                            <div class="col">
+                              {{ userinfoform.designation_and_department.label }}
+                              {{ userinfoform.designation_and_department }}
+                            </div>
+                            <div class="col">
+                              {{ userinfoform.organization.label }}
+                              {{ userinfoform.organization }}
+                              </div>
+                          </div>
+                          <br>
+
+                          <div class="row">
+                            <div class="col">
+                              {{ userinfoform.address.label }}
+                              {{ userinfoform.address }}
+                            </div>
+                          </div>
+                          <br>
+
+
+                        <div class="">
+                            <p>Already have account? <a href="{% url 'login' %}">Click hare</a></p>
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                        <br>
+                    </form>
+                </div>
+            </div>
+            <br>
+        </div>
+
+        <div class="col">
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
+<!-- 
+<div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+</div> -->

@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
 
-from .forms import CreateUserForm, CreateUserInfoForm
+from .forms import CreateUserForm, CreateUserInfoForm, StafRegistration
 from .models import User, UserRegistrationForm
 
 
@@ -16,7 +16,7 @@ def loginView(request):
 
         if user is not None:
             login(request, user)
-            if user.is_active:
+            if user.is_publish:
                 messages.info(request, 'You have succesfully logged in.')
                 return redirect('home')
             else:
@@ -46,7 +46,44 @@ def userRegistration(request):
     context = {'userregisterform':userregisterform, 'userinfoform': userinfoform}
     return render(request, 'accounts/user_registration.html', context)
 
+def adminLogin(request):
+    if request.method == "POST":
+        user = authenticate(
+            mobile_number = request.POST['mobile_number'],
+            password = request.POST['password']
+        )
 
-def logoutUser(request):
+        if user.is_staff & user.is_superuser is not None:
+            login(request, user)
+            if user.is_publish:
+                messages.info(request, 'You have succesfully logged in.')
+                return redirect('home')
+            else:
+                messages.error(request, 'Your account is currently inactive.')
+                return redirect('not-active')
+        else:
+            messages.error(request, 'Mobile Number OR Password is incorrect')
+            return redirect('login')
+        
+    context = {}
+    return render(request, 'accounts/admin-login.html', context)
+
+def stafRegistration(request):
+    form = StafRegistration()
+    if request.method == 'POST':
+        form = StafRegistration(request.POST)
+        if form.is_valid():
+            form.save()
+
+            messages.success(request, 'User account was created!')
+            return redirect('home')
+        else:
+            messages.error(
+                request, 'An error has occurred during registration')
+
+    context = {'form':form}
+    return render(request, 'accounts/staf_registration.html', context)
+
+def logoutEveryBody(request):
     logout(request)
     return redirect('login')

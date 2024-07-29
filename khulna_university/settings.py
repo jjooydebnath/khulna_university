@@ -29,6 +29,7 @@ ALLOWED_HOSTS = ['*', '127.0.0.1']
 
 AUTH_USER_MODEL = 'accounts.User'
 
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -42,8 +43,8 @@ INSTALLED_APPS = [
     # create apps
     'accounts.apps.AccountsConfig',
     'base.apps.BaseConfig',
-    'userdashboard.apps.UserdashboardConfig',
     'dashboard.apps.DashboardConfig',
+    'userprofile.apps.UserprofileConfig',
 ]
 
 MIDDLEWARE = [

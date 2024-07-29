@@ -4,4 +4,4 @@ def homeView(request):
     return render(request, 'base/home.html')
 
 def notActiveUser(request):
-    return render(request, 'not-active.html')
+    return render(request, 'base/not-active.html')

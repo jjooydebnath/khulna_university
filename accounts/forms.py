@@ -67,3 +67,29 @@ class CreateUserInfoForm(ModelForm):
         self.fields['designation_and_department'].widget.attrs.update({'class':'form-control', 'placeholder': ''})
         self.fields['organization'].widget.attrs.update({'class':'form-control', 'placeholder': ''})
         self.fields['address'].widget.attrs.update({'class':'form-control', 'placeholder': ''})
+
+
+class StafRegistration(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ['full_name', 'email', 'mobile_number',
+                  'is_superuser', 'is_staff', 'is_active', 'is_publish', 'user_permissions',
+                  'password1', 'password2']
+        widgets = {
+            'user_permissions': forms.CheckboxSelectMultiple(),
+        }
+
+        labels = {
+            'full_name': 'Full Name',
+            'email': 'Email',
+            'mobile_number': 'Mobile Number'
+        }
+    def __init__(self, *args, **kwargs):
+        super(StafRegistration, self).__init__(*args, **kwargs)
+
+        self.fields['full_name'].widget.attrs.update({'class':'form-control', 'placeholder': ''})
+        self.fields['email'].widget.attrs.update({'class':'form-control', 'placeholder': ''})
+        self.fields['mobile_number'].widget.attrs.update({'class':'form-control', 'placeholder': ''})
+        # self.fields['user_permissions'].widget.attrs.update({'class':'form-control', 'placeholder': ''})
+        self.fields['password1'].widget.attrs.update({'class':'form-control', 'placeholder': ''})
+        self.fields['password2'].widget.attrs.update({'class':'form-control', 'placeholder': ''})

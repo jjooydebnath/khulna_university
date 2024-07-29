@@ -4,20 +4,37 @@ from django.db import models
 import uuid
 from django.contrib.auth.models import AbstractUser
 
+
+
 class User(AbstractUser):
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
     full_name = models.CharField(max_length=150, null=True)
     email = models.EmailField(unique=True, null=True)
     mobile_number = models.CharField(max_length=11, null=True, unique=True)
-    is_active = models.BooleanField(('active'), default=False, help_text=(
+    is_publish = models.BooleanField(('publish'), default=False, help_text=(
         'Designates whether this user should be treated as active. '
             'Unselect this instead of deleting accounts.'))
 
     USERNAME_FIELD = 'mobile_number'
     REQUIRED_FIELDS = ['username']
 
+    
+
     def __str__(self):
         return str(self.mobile_number)
+    
+
+def set_username(sender, instance, **kwargs):
+    if not instance.username:
+        username = instance.full_name
+        counter = 1
+        while User.objects.filter(username=username):
+            username = instance.first_name + str(counter)
+            counter += 1
+        instance.username = username
+models.signals.pre_save.connect(set_username, sender=User)
+    
+    
     
 
 class UserRegistrationForm(models.Model):
@@ -39,5 +56,5 @@ class UserRegistrationForm(models.Model):
     
 
     def __str__(self):
-        return str(self.address)
+        return str(self.user.mobile_number)
     

@@ -2,7 +2,6 @@
 {% block title %} Login {% endblock %}
 {% block content %}
 <div class="container">
-    <br>
     <div class="">
         <a href="{% url 'home' %}" class="btn btn-warning">back</a>
     </div>
@@ -16,7 +15,7 @@
             <div class="card" style="height: 320px;">
                 
                 <div class="container" style="margin: 15px 0 0 0;">
-                    <h2 class="card-title text-center">User Login here</h2>
+                    <h2 class="card-title text-center">Admin/ Super Admin Login here</h2>
                     <form method="POST" action="{% url 'login' %}">
                         {% csrf_token %}
                         <div class="form-group">

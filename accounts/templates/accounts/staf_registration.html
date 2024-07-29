@@ -1,0 +1,114 @@
+{% extends 'accounts/base.html' %}
+{% include 'accounts/navbar.html' %}
+{% block content %}
+
+<style>
+  #id_user_permissions {
+    height: 200px; /* Adjust height as needed */
+    overflow-y: scroll;
+    border: 1px solid #ccc;
+  }
+  
+  #id_user_permissions label {
+    padding: 10px;
+    cursor: pointer;
+  }
+
+  #id_user_permissions {
+    border-radius: 7px;
+  }
+</style>
+<div class="container">
+    <br>
+    <div class="">
+        <a href="#" class="btn btn-warning">back</a>
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col">
+
+        </div>
+
+        <div class="col">
+            <div class="card" style="width: 50rem;">
+                
+                <div class="container" style="margin: 15px 0 0 0;">
+                    <h3 class="card-title text-center">Staf OR Admin Registration</h3>
+                    <br>
+                    <form method="POST" action="">
+                      {% csrf_token %}
+                        <div class="row">
+                            <div class="col">
+                            {{ form.full_name.label }}
+                            {{ form.full_name }}
+                            </div>
+                          </div>
+                          <br>
+
+                          <div class="row">
+                            <div class="col">
+                              {{ form.email.label }}
+                              {{ form.email }}
+                            </div>
+                            <div class="col">
+                              {{ form.mobile_number.label }}
+                              {{ form.mobile_number }}
+                              </div>
+                          </div>
+                          <br>
+
+                          <div class="col">
+                            {{ form.user_permissions.label }}
+                            {{ form.user_permissions }}
+                          </div>
+                          <br>
+
+                          <div class="row">
+                            <div class="col">
+                              {{ form.is_superuser.label }}
+                              {{ form.is_superuser }}
+                            </div>
+                            <div class="col">
+                              {{ form.is_staff.label }}
+                              {{ form.is_staff }}
+                              </div>
+                              <div class="col">
+                                {{ form.is_active.label }}
+                                {{ form.is_active }}
+                              </div>
+                              <div class="col">
+                                {{ form.is_publish.label }}
+                                {{ form.is_publish }}
+                              </div>
+                          </div>
+                          <br>
+
+                          <div class="row">
+                            <div class="col">
+                              {{ form.password1.label }}
+                              {{ form.password1 }}
+                            </div>
+                            <div class="col">
+                              {{ form.password2.label }}
+                              {{ form.password2 }}
+                              </div>
+                          </div>
+                          <br>
+
+
+                        <div class="">
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                        <br>
+                    </form>
+                </div>
+            </div>
+            <br>
+        </div>
+        <div class="col">
+
+        </div>
+    </div>
+</div>
+{% endblock %}

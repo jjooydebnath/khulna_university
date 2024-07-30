@@ -1,3 +1,74 @@
 {% extends 'dashboard/base.html' %}
 {% block content %}
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title text-center">Total Users</h3>
+                    <hr>
+                    <h4 class="card-text text-center">{{ users.count }}</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title text-center">Total Activate</h3>
+                    <hr>
+                    <h4 class="card-text text-center">{{ activecount }}</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title text-center">Total Deactivate</h3>
+                    <hr>
+                    <h4 class="card-text text-center">{{ dactivecount }}</h4>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">SL</th>
+                            <th scope="col">Full Name</th>
+                            <th scope="col">Mobile Number</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Active/Deactive</th>
+                            <th scope="col">More</td>
+                          </tr>
+                        </thead>
+                        {% for obj in users %}
+                        <tbody>
+                          <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{ obj.user.full_name }}</td>
+                            <td>{{ obj.user.mobile_number }}</td>
+                            <td>{{ obj.user.email }}</td>
+                            <td>{{ obj.is_publish }}</td>
+                            <td><a href="{% url 'user-edit' obj.id %}" class="btn btn-info">View More</a></td>
+                          </tr>
+                          
+                        </tbody>
+                        {% endfor %}
+                      </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
 {% endblock %}

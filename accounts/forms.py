@@ -7,34 +7,18 @@ from .models import User, UserRegistrationForm
 class CreateUserForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['full_name', 'email', 'mobile_number', 'password1', 'password2']
+        fields = ['full_name', 'email', 'mobile_number', 'password1', 'password2',
+                'b_pharm_roll_no', 'm_pharm_roll_no', 'date_of_birth',
+                'blood_group', 'name_of_spouse', 'marriage_date', 'no_of_kids',
+                'hobbies', 'present_address', 'permanent_address',
+                'designation_and_department', 'organization', 'address'
+                ]
 
         labels = {
             'full_name': 'Full Name',
             'email': 'Email',
-            'mobile_number': 'Mobile Number'
-        }
+            'mobile_number': 'Mobile Number',
 
-    def __init__(self, *args, **kwargs):
-        super(CreateUserForm, self).__init__(*args, **kwargs)
-
-        self.fields['full_name'].widget.attrs.update({'class':'form-control', 'placeholder': 'Full Name'})
-        self.fields['email'].widget.attrs.update({'class':'form-control', 'placeholder': 'email@domain.com'})
-        self.fields['mobile_number'].widget.attrs.update({'class':'form-control', 'placeholder': '01******'})
-        self.fields['password1'].widget.attrs.update({'class':'form-control', 'placeholder': '******'})
-        self.fields['password2'].widget.attrs.update({'class':'form-control', 'placeholder': '******'})
-
-class CreateUserInfoForm(ModelForm):
-    class Meta:
-        model = UserRegistrationForm
-        fields = [
-            'b_pharm_roll_no', 'm_pharm_roll_no', 'date_of_birth',
-            'blood_group', 'name_of_spouse', 'marriage_date', 'no_of_kids',
-            'hobbies', 'present_address', 'permanent_address',
-            'designation_and_department', 'organization', 'address'
-            ]
-        
-        labels = {
             'b_pharm_roll_no': 'B. Pharm (Roll No.)',
             'm_pharm_roll_no': 'M. Pharm (Roll  No.)',
             'date_of_birth': 'Date of Birth',
@@ -50,9 +34,14 @@ class CreateUserInfoForm(ModelForm):
             'address' : 'Address'
         }
 
-
     def __init__(self, *args, **kwargs):
-        super(CreateUserInfoForm, self).__init__(*args, **kwargs)
+        super(CreateUserForm, self).__init__(*args, **kwargs)
+
+        self.fields['full_name'].widget.attrs.update({'class':'form-control', 'placeholder': 'Full Name'})
+        self.fields['email'].widget.attrs.update({'class':'form-control', 'placeholder': 'email@domain.com'})
+        self.fields['mobile_number'].widget.attrs.update({'class':'form-control', 'placeholder': '01******'})
+        self.fields['password1'].widget.attrs.update({'class':'form-control', 'placeholder': '******'})
+        self.fields['password2'].widget.attrs.update({'class':'form-control', 'placeholder': '******'})
 
         self.fields['b_pharm_roll_no'].widget.attrs.update({'class':'form-control', 'placeholder': 'e.g 1***'})
         self.fields['m_pharm_roll_no'].widget.attrs.update({'class':'form-control', 'placeholder': 'e.g 1***'})
@@ -68,12 +57,30 @@ class CreateUserInfoForm(ModelForm):
         self.fields['organization'].widget.attrs.update({'class':'form-control', 'placeholder': ''})
         self.fields['address'].widget.attrs.update({'class':'form-control', 'placeholder': ''})
 
+class UserMemberShipForm(ModelForm):
+    class Meta:
+        model = UserRegistrationForm
+        fields = [
+            'membership_status', 'is_publish'
+            ]
+        
+        labels = {
+            'membership_status' : 'Choice Your Membership',
+            'is_publish' : 'Active'
+        }
+
+
+    def __init__(self, *args, **kwargs):
+        super(UserMemberShipForm, self).__init__(*args, **kwargs)
+
+        self.fields['membership_status'].widget.attrs.update({'class':'form-control', 'placeholder': ''})
+
 
 class StafRegistration(UserCreationForm):
     class Meta:
         model = User
         fields = ['full_name', 'email', 'mobile_number',
-                  'is_superuser', 'is_staff', 'is_active', 'is_publish', 'user_permissions',
+                  'is_superuser', 'is_staff', 'is_active', 'user_permissions',
                   'password1', 'password2']
         widgets = {
             'user_permissions': forms.CheckboxSelectMultiple(),

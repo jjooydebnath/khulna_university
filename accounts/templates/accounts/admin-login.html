@@ -16,7 +16,7 @@
                 
                 <div class="container" style="margin: 15px 0 0 0;">
                     <h2 class="card-title text-center">Admin/ Super Admin Login here</h2>
-                    <form method="POST" action="{% url 'login' %}">
+                    <form method="POST" action="{% url 'admin-login' %}">
                         {% csrf_token %}
                         <div class="form-group">
                             <label>Mobile Number</label>

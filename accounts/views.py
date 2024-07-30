@@ -3,11 +3,12 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
 
-from .forms import CreateUserForm, CreateUserInfoForm, StafRegistration
+from .forms import CreateUserForm, UserMemberShipForm, StafRegistration
 from .models import User, UserRegistrationForm
 
 
 def loginView(request):
+    users = UserRegistrationForm()
     if request.method == "POST":
         user = authenticate(
             mobile_number = request.POST['mobile_number'],
@@ -16,7 +17,7 @@ def loginView(request):
 
         if user is not None:
             login(request, user)
-            if user.is_publish:
+            if users.is_publish:
                 messages.info(request, 'You have succesfully logged in.')
                 return redirect('home')
             else:
@@ -30,14 +31,14 @@ def loginView(request):
     return render(request, 'accounts/login.html', context)
 
 def userRegistration(request):
+    userinfoform = UserMemberShipForm()
     userregisterform = CreateUserForm()
-    userinfoform = CreateUserInfoForm()
     if request.method == 'POST':
         userregisterform = CreateUserForm(request.POST)
-        userinfoform = CreateUserInfoForm(request.POST)
+        userinfoform = UserMemberShipForm(request.POST)
         if userregisterform.is_valid() & userinfoform.is_valid():
             user = userregisterform.save()
-            userinfoform = userinfoform.save(False)
+            userinfoform = userinfoform.save(commit=False)
             userinfoform.user = user
             userinfoform.save()
 
@@ -55,15 +56,11 @@ def adminLogin(request):
 
         if user.is_staff & user.is_superuser is not None:
             login(request, user)
-            if user.is_publish:
-                messages.info(request, 'You have succesfully logged in.')
-                return redirect('home')
-            else:
-                messages.error(request, 'Your account is currently inactive.')
-                return redirect('not-active')
+            messages.info(request, 'You have succesfully logged in.')
+            return redirect('dashboard')
         else:
             messages.error(request, 'Mobile Number OR Password is incorrect')
-            return redirect('login')
+            return redirect('admin-login')
         
     context = {}
     return render(request, 'accounts/admin-login.html', context)
@@ -84,6 +81,11 @@ def stafRegistration(request):
     context = {'form':form}
     return render(request, 'accounts/staf_registration.html', context)
 
-def logoutEveryBody(request):
+def logoutUser(request):
     logout(request)
     return redirect('login')
+
+
+def logoutAdmin(request):
+    logout(request)
+    return redirect('admin-login')

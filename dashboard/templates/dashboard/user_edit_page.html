@@ -1,9 +1,8 @@
-{% extends 'accounts/base.html' %}
-{% block title %} Login {% endblock %}
+{% extends 'dashboard/base.html' %}
 {% block content %}
 <div class="container">
     <div class="">
-        <a href="{% url 'home' %}" class="btn btn-warning">back</a>
+        <a href="{% url 'dashboard' %}" class="btn btn-warning">back</a>
     </div>
     <br>
 
@@ -16,52 +15,40 @@
             <div class="card" style="width: 50rem;">
                 
                 <div class="container" style="margin: 15px 0 0 0;">
-                    <h3 class="card-title text-center">Pharmacy Alumni Association</h3>
-                    <h5 class="card-text text-center">Membership Application</h5>
+                    <h5 class="card-text text-center">User Update form</h5>
                     <br>
                     <form method="POST" action="">
                       {% csrf_token %}
                         <div class="">
                             <h4>Personal Information</h4>
                         </div>
-
-                        <div class="row">
-                          <div class="col">
-                            {{ userinfoform.membership_status.label }}
-                            {{ userinfoform.membership_status }}
-                          </div>
-                          <div class="col">
-                            </div>
-                        </div>
-                        <br>
-                        
                         <div class="row">
                             <div class="col">
-                              {{ userregisterform.full_name }}
+                              {{ userobj.full_name }}
                             </div>
                           </div>
                           <br>
 
                           <div class="row">
                             <div class="col">
-                              {{ userregisterform.b_pharm_roll_no.label }}
-                              {{ userregisterform.b_pharm_roll_no }}
+                              {{ userformobj.b_pharm_roll_no.label }}
+                              {{ userformobj.b_pharm_roll_no }}
                             </div>
                             <div class="col">
-                              {{ userregisterform.m_pharm_roll_no.label }}
-                              {{ userregisterform.m_pharm_roll_no }}
+                              {{ userformobj.m_pharm_roll_no.label }}
+                              {{ userformobj.m_pharm_roll_no }}
                               </div>
                           </div>
                           <br>
 
                           <div class="row">
                             <div class="col">
-                              {{ userregisterform.date_of_birth.label }}
-                              {{ userregisterform.date_of_birth }}
+                              {{ userformobj.date_of_birth.label }}
+                              {{ userformobj.date_of_birth }}
                             </div>
                             <div class="col">
-                              {{ userregisterform.blood_group.label }}
-                              {{ userregisterform.blood_group }}
+                              {{ userformobj.blood_group.label }}
+                              {{ userformobj.blood_group }}
                               </div>
                           </div>
                           <br>
@@ -69,14 +56,14 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                  {{ userregisterform.email.label }}
-                                  {{ userregisterform.email }}
+                                  {{ userobj.email.label }}
+                                  {{ userobj.email }}
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                  {{ userregisterform.mobile_number.label }}
-                                  {{ userregisterform.mobile_number }}
+                                  {{ userobj.mobile_number.label }}
+                                  {{ userobj.mobile_number }}
                                 </div>
                             </div>
                         </div>
@@ -84,52 +71,52 @@
 
                         <div class="row">
                             <div class="col">
-                              {{ userregisterform.name_of_spouse.label }}
-                              {{ userregisterform.name_of_spouse }}
+                              {{ userformobj.name_of_spouse.label }}
+                              {{ userformobj.name_of_spouse }}
                             </div>
                             <div class="col">
-                              {{ userregisterform.marriage_date.label }}
-                              {{ userregisterform.marriage_date }}
+                              {{ userformobj.marriage_date.label }}
+                              {{ userformobj.marriage_date }}
                               </div>
                           </div>
                           <br>
 
                           <div class="row">
                             <div class="col">
-                              {{ userregisterform.no_of_kids.label }}
-                              {{ userregisterform.no_of_kids }}
+                              {{ userformobj.no_of_kids.label }}
+                              {{ userformobj.no_of_kids }}
                             </div>
                             <div class="col">
-                              {{ userregisterform.hobbies.label }}
-                              {{ userregisterform.hobbies }}
+                              {{ userformobj.hobbies.label }}
+                              {{ userformobj.hobbies }}
                               </div>
                           </div>
                           <br>
 
                           <div class="row">
                             <div class="col">
-                              {{ userregisterform.password1.label }}
-                              {{ userregisterform.password1 }}
+                              {{ userformobj.password1.label }}
+                              {{ userformobj.password1 }}
                             </div>
                             <div class="col">
-                              {{ userregisterform.password2.label }}
-                              {{ userregisterform.password2 }}
+                              {{ userformobj.password2.label }}
+                              {{ userformobj.password2 }}
                               </div>
                           </div>
                           <br>
 
                           <div class="row">
                             <div class="col">
-                              {{ userregisterform.present_address.label }}
-                              {{ userregisterform.present_address }}
+                              {{ userformobj.present_address.label }}
+                              {{ userformobj.present_address }}
                             </div>
                           </div>
                           <br>
 
                           <div class="row">
                             <div class="col">
-                              {{ userregisterform.permanent_address.label }}
-                              {{ userregisterform.permanent_address }}
+                              {{ userformobj.permanent_address.label }}
+                              {{ userformobj.permanent_address }}
                             </div>
                           </div>
                           <br>
@@ -140,27 +127,33 @@
 
                           <div class="row">
                             <div class="col">
-                              {{ userregisterform.designation_and_department.label }}
-                              {{ userregisterform.designation_and_department }}
+                              {{ userformobj.designation_and_department.label }}
+                              {{ userformobj.designation_and_department }}
                             </div>
                             <div class="col">
-                              {{ userregisterform.organization.label }}
-                              {{ userregisterform.organization }}
+                              {{ userformobj.organization.label }}
+                              {{ userformobj.organization }}
                               </div>
                           </div>
                           <br>
 
                           <div class="row">
                             <div class="col">
-                              {{ userregisterform.address.label }}
-                              {{ userregisterform.address }}
+                              {{ userformobj.address.label }}
+                              {{ userformobj.address }}
+                            </div>
+                          </div>
+                          <br>
+                          <div class="row">
+                            <div class="col">
+                              {{ userformobj.is_publish.label }}
+                              {{ userformobj.is_publish }}
                             </div>
                           </div>
                           <br>
 
 
                         <div class="">
-                            <p>Already have account? <a href="{% url 'login' %}">Click hare</a></p>
                             <button type="submit" class="btn btn-success">Submit</button>
                         </div>
                         <br>
@@ -176,11 +169,3 @@
     </div>
 </div>
 {% endblock %}
-
-
-
-<!-- 
-<div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-</div> -->

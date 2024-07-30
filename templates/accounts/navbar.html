@@ -6,7 +6,7 @@
         <a href="{% url 'logout' %}" class="btn btn-outline-danger">LogOut</a>
         {% else %}
         <a href="{% url 'login' %}" class="btn btn-outline-secondary">User Login</a>
-        <a href="{% url 'login' %}" class="btn btn-outline-danger">Admin/ Super Admin Login</a>
+        <a href="{% url 'admin-login' %}" class="btn btn-outline-danger">Admin/ Super Admin Login</a>
         {% endif %}
       </div>
     </div>

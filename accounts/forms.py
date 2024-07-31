@@ -7,7 +7,7 @@ from .models import User, UserRegistrationForm
 class CreateUserForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['full_name', 'email', 'mobile_number', 'password1', 'password2',
+        fields = ['full_name', 'email', 'mobile_number', 'profile_picture', 'password1', 'password2',
                 'b_pharm_roll_no', 'm_pharm_roll_no', 'date_of_birth',
                 'blood_group', 'name_of_spouse', 'marriage_date', 'no_of_kids',
                 'hobbies', 'present_address', 'permanent_address',
@@ -40,6 +40,7 @@ class CreateUserForm(UserCreationForm):
         self.fields['full_name'].widget.attrs.update({'class':'form-control', 'placeholder': 'Full Name'})
         self.fields['email'].widget.attrs.update({'class':'form-control', 'placeholder': 'email@domain.com'})
         self.fields['mobile_number'].widget.attrs.update({'class':'form-control', 'placeholder': '01******'})
+        self.fields['profile_picture'].widget.attrs.update({'class':'form-control', 'placeholder': ''})
         self.fields['password1'].widget.attrs.update({'class':'form-control', 'placeholder': '******'})
         self.fields['password2'].widget.attrs.update({'class':'form-control', 'placeholder': '******'})
 

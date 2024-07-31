@@ -1,171 +1,175 @@
 {% extends 'dashboard/base.html' %}
 {% block content %}
 <div class="container">
-    <div class="">
-        <a href="{% url 'dashboard' %}" class="btn btn-warning">back</a>
-    </div>
-    <br>
+  <br>
+  <div class="">
+      <a href="{% url 'dashboard' %}" class="btn btn-warning">back</a>
+  </div>
+  <br>
 
-    <div class="row">
-        <div class="col">
+  <div class="row">
+      <div class="col">
 
-        </div>
+      </div>
 
-        <div class="col">
-            <div class="card" style="width: 50rem;">
-                
-                <div class="container" style="margin: 15px 0 0 0;">
-                    <h5 class="card-text text-center">User Update form</h5>
-                    <br>
-                    <form method="POST" action="">
-                      {% csrf_token %}
-                        <div class="">
-                            <h4>Personal Information</h4>
+      <div class="col">
+          <div class="card" style="width: 50rem;">
+              
+              <div class="container" style="margin: 15px 0 0 0;">
+                  <h3 class="card-title text-center">Pharmacy Alumni Association</h3>
+                  <h5 class="card-text text-center">Update Profile</h5>
+                  <br>
+                  <form method="POST" action="">
+                    {% csrf_token %}
+                      <div class="">
+                          <h4>Personal Information</h4>
+                      </div>
+                      
+                      <div class="row">
+                          <div class="col">
+                            <label>Full Name: </label>
+                            {{ userinfo.full_name|title }}
+                          </div>
                         </div>
-                        <div class="row">
-                            <div class="col">
-                              {{ userobj.full_name }}
-                            </div>
-                          </div>
-                          <br>
-
-                          <div class="row">
-                            <div class="col">
-                              {{ userformobj.b_pharm_roll_no.label }}
-                              {{ userformobj.b_pharm_roll_no }}
-                            </div>
-                            <div class="col">
-                              {{ userformobj.m_pharm_roll_no.label }}
-                              {{ userformobj.m_pharm_roll_no }}
-                              </div>
-                          </div>
-                          <br>
-
-                          <div class="row">
-                            <div class="col">
-                              {{ userformobj.date_of_birth.label }}
-                              {{ userformobj.date_of_birth }}
-                            </div>
-                            <div class="col">
-                              {{ userformobj.blood_group.label }}
-                              {{ userformobj.blood_group }}
-                              </div>
-                          </div>
-                          <br>
+                        <br>
 
                         <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                  {{ userobj.email.label }}
-                                  {{ userobj.email }}
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-group">
-                                  {{ userobj.mobile_number.label }}
-                                  {{ userobj.mobile_number }}
-                                </div>
+                          <div class="col">
+                            <label>B. Pharm(Roll No.): </label>
+                            {{ userinfo.b_pharm_roll_no }}
+                          </div>
+                          <div class="col">
+                            <label>M. Pharm(Roll No.): </label>
+                            {{ userinfo.m_pharm_roll_no }}
                             </div>
                         </div>
                         <br>
 
                         <div class="row">
-                            <div class="col">
-                              {{ userformobj.name_of_spouse.label }}
-                              {{ userformobj.name_of_spouse }}
+                          <div class="col">
+                            <label>Date of Birth: </label>
+                            {{ userinfo.date_of_birth }}
+                          </div>
+                          <div class="col">
+                            <label>Blood Group: </label>
+                            {{ userinfo.blood_group }}
                             </div>
-                            <div class="col">
-                              {{ userformobj.marriage_date.label }}
-                              {{ userformobj.marriage_date }}
-                              </div>
-                          </div>
-                          <br>
-
-                          <div class="row">
-                            <div class="col">
-                              {{ userformobj.no_of_kids.label }}
-                              {{ userformobj.no_of_kids }}
-                            </div>
-                            <div class="col">
-                              {{ userformobj.hobbies.label }}
-                              {{ userformobj.hobbies }}
-                              </div>
-                          </div>
-                          <br>
-
-                          <div class="row">
-                            <div class="col">
-                              {{ userformobj.password1.label }}
-                              {{ userformobj.password1 }}
-                            </div>
-                            <div class="col">
-                              {{ userformobj.password2.label }}
-                              {{ userformobj.password2 }}
-                              </div>
-                          </div>
-                          <br>
-
-                          <div class="row">
-                            <div class="col">
-                              {{ userformobj.present_address.label }}
-                              {{ userformobj.present_address }}
-                            </div>
-                          </div>
-                          <br>
-
-                          <div class="row">
-                            <div class="col">
-                              {{ userformobj.permanent_address.label }}
-                              {{ userformobj.permanent_address }}
-                            </div>
-                          </div>
-                          <br>
-
-                          <div class="">
-                            <h4>Professional Information</h4>
-                          </div>
-
-                          <div class="row">
-                            <div class="col">
-                              {{ userformobj.designation_and_department.label }}
-                              {{ userformobj.designation_and_department }}
-                            </div>
-                            <div class="col">
-                              {{ userformobj.organization.label }}
-                              {{ userformobj.organization }}
-                              </div>
-                          </div>
-                          <br>
-
-                          <div class="row">
-                            <div class="col">
-                              {{ userformobj.address.label }}
-                              {{ userformobj.address }}
-                            </div>
-                          </div>
-                          <br>
-                          <div class="row">
-                            <div class="col">
-                              {{ userformobj.is_publish.label }}
-                              {{ userformobj.is_publish }}
-                            </div>
-                          </div>
-                          <br>
-
-
-                        <div class="">
-                            <button type="submit" class="btn btn-success">Submit</button>
                         </div>
                         <br>
-                    </form>
-                </div>
-            </div>
-            <br>
-        </div>
 
-        <div class="col">
+                      <div class="row">
+                          <div class="col">
+                              <div class="form-group">
+                                <label>Email: </label>
+                                {{ userinfo.email }}
+                              </div>
+                          </div>
+                          <div class="col">
+                              <div class="form-group">
+                                <label>Mobile Number: </label>
+                                {{ userinfo.mobile_number }}
+                              </div>
+                          </div>
+                      </div>
+                      <br>
 
-        </div>
-    </div>
+                      <div class="row">
+                          <div class="col">
+                            <label>Wife Name: </label>
+                            {{ userinfo.name_of_spouse }}
+                          </div>
+                          <div class="col">
+                            <label>Marriage Date: </label>
+                            {{ userinfo.marriage_date }}
+                            </div>
+                        </div>
+                        <br>
+
+                        <div class="row">
+                          <div class="col">
+                            <label>No of Kids: </label>
+                            {{ userinfo.no_of_kids }}
+                          </div>
+                          <div class="col">
+                            <label>Hobbies: </label>
+                            {{ userinfo.hobbies }}
+                            </div>
+                        </div>
+                        <br>
+
+                        <div class="row">
+                          <div class="col">
+                            <label>Present Address: </label>
+                            {{ userinfo.present_address }}
+                          </div>
+                          <div class="col">
+                            <label>Permanent Address: </label>
+                            {{ userinfo.permanent_address }}
+                          </div>
+                        </div>
+                        <br>
+
+                        <div class="">
+                          <h4>Professional Information</h4>
+                        </div>
+
+                        <div class="row">
+                          <div class="col">
+                            <label>Designation and Department: </label>
+                            {{ userinfo.designation_and_department }}
+                          </div>
+                          <div class="col">
+                            <label>Organization: </label>
+                            {{ userinfo.organization }}
+                            </div>
+                        </div>
+                        <br>
+
+                        <div class="row">
+                          <div class="col">
+                            <label>Office Address: </label>
+                            {{ userinfo.address }}
+                          </div>
+                        </div>
+                        <br>
+
+                        <div class="">
+                          <h4>Account Information</h4>
+                        </div>
+
+                        <div class="row">
+                          <div class="col">
+                            {{ useradd_data.membership_status.label }}
+                            {{ useradd_data.membership_status }}
+                          </div>
+                          <div class="col">
+
+                          </div>
+                        </div>
+                        <br>
+
+                        <div class="row">
+                          <div class="col">
+                            {{ useradd_data.is_publish.label }}
+                            {{ useradd_data.is_publish }}
+                          </div>
+                        </div>
+                        <br>
+
+
+                      <div class="">
+                          <button type="submit" class="btn btn-success">Save</button>
+                      </div>
+                      <br>
+                  </form>
+              </div>
+          </div>
+          <br>
+      </div>
+
+      <div class="col">
+
+      </div>
+  </div>
 </div>
 {% endblock %}

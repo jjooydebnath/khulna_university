@@ -10,6 +10,7 @@ class User(AbstractUser):
     full_name = models.CharField(max_length=150, null=True)
     email = models.EmailField(unique=True, null=True)
     mobile_number = models.CharField(max_length=11, null=True, unique=True)
+    profile_picture = models.ImageField(upload_to='profile/', null=True, blank=True)
     
 
     USERNAME_FIELD = 'mobile_number'
@@ -28,6 +29,7 @@ class User(AbstractUser):
     designation_and_department = models.CharField(max_length=100, null=True, blank=True)
     organization = models.CharField(max_length=150, null=True, blank=True)
     address = models.CharField(max_length=250, null=True, blank=True)
+
 
     
 
@@ -49,7 +51,7 @@ models.signals.pre_save.connect(set_username, sender=User)
     
 
 class UserRegistrationForm(models.Model):
-    user = models.ForeignKey(User, null=True, blank=True, on_delete= models.CASCADE)
+    user = models.OneToOneField(User, null=True, blank=True, on_delete= models.CASCADE)
     MEMBERSHIP_STATUS = (
         ('Genarel', 'Genarel'),
         ('Associate', 'Assicuate')

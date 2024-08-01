@@ -1,0 +1,176 @@
+{% extends 'userprofile/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <br>
+    <div class="">
+        <a href="{% url 'user-home' %}" class="btn btn-warning">back</a>
+    </div>
+    <br>
+  
+    <div class="row">
+        <div class="col">
+  
+        </div>
+  
+        <div class="col">
+            <div class="card" style="width: 50rem;">
+                
+                <div class="container" style="margin: 15px 0 0 0;">
+                    <div class="row">
+                        <div class="col">
+
+                        </div>
+                        <div class="col">
+                            <div class="text-center">
+                                <img src="{{ user.profile_picture.url }}" class="rounded-circle" style="width: 150px;">
+                                <h3>{{ user.full_name.title }}</h3>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="text-end">
+                                <a href="#" class="btn btn-primary">Edit Account</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <br>
+                    <form method="POST" action="">
+                      {% csrf_token %}
+                        <div class="">
+                            <h4>Personal Information</h4>
+                        </div>
+                          <div class="row">
+                            <div class="col">
+                              <label>B. Pharm(Roll No.): </label>
+                              {{ user.b_pharm_roll_no }}
+                            </div>
+                            <div class="col">
+                              <label>M. Pharm(Roll No.): </label>
+                              {{ user.m_pharm_roll_no }}
+                              </div>
+                          </div>
+                          <br>
+  
+                          <div class="row">
+                            <div class="col">
+                              <label>Date of Birth: </label>
+                              {{ user.date_of_birth }}
+                            </div>
+                            <div class="col">
+                              <label>Blood Group: </label>
+                              {{ user.blood_group }}
+                              </div>
+                          </div>
+                          <br>
+  
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                  <label>Email: </label>
+                                  {{ user.email }}
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                  <label>Mobile Number: </label>
+                                  {{ user.mobile_number }}
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+  
+                        <div class="row">
+                            <div class="col">
+                              <label>Wife Name: </label>
+                              {{ user.name_of_spouse }}
+                            </div>
+                            <div class="col">
+                              <label>Marriage Date: </label>
+                              {{ user.marriage_date }}
+                              </div>
+                          </div>
+                          <br>
+  
+                          <div class="row">
+                            <div class="col">
+                              <label>No of Kids: </label>
+                              {{ user.no_of_kids }}
+                            </div>
+                            <div class="col">
+                              <label>Hobbies: </label>
+                              {{ user.hobbies }}
+                              </div>
+                          </div>
+                          <br>
+  
+                          <div class="row">
+                            <div class="col">
+                              <label>Present Address: </label>
+                              {{ user.present_address }}
+                            </div>
+                            <div class="col">
+                              <label>Permanent Address: </label>
+                              {{ user.permanent_address }}
+                            </div>
+                          </div>
+                          <br>
+  
+                          <div class="">
+                            <h4>Professional Information</h4>
+                          </div>
+  
+                          <div class="row">
+                            <div class="col">
+                              <label>Designation and Department: </label>
+                              {{ user.designation_and_department }}
+                            </div>
+                            <div class="col">
+                              <label>Organization: </label>
+                              {{ user.organization }}
+                              </div>
+                          </div>
+                          <br>
+  
+                          <div class="row">
+                            <div class="col">
+                              <label>Office Address: </label>
+                              {{ user.address }}
+                            </div>
+                          </div>
+                          <br>
+  
+                          <div class="">
+                            <h4>Account Information</h4>
+                          </div>
+  
+                          <div class="row">
+                            <div class="col">
+                              <label>Membership staus: </label>
+                              {{ users.membership_status }}
+                            </div>
+                            <div class="col">
+  
+                            </div>
+                          </div>
+                          <br>
+  
+                          <div class="row">
+                            <div class="col">
+                              <label>Account Active: </label>
+                              {{ users.is_publish }}
+                            </div>
+                          </div>
+                          <br>
+                    </form>
+                </div>
+            </div>
+            <br>
+        </div>
+  
+        <div class="col">
+  
+        </div>
+    </div>
+  </div>
+{% endblock %}

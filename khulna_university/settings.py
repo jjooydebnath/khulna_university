@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-
+from django.contrib.messages import constants as messages
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -136,6 +136,10 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = BASE_DIR / 'static/uploads'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
+
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger'
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

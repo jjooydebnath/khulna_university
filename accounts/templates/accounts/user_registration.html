@@ -10,7 +10,6 @@
 
     <div class="row">
         <div class="col">
-
         </div>
 
         <div class="col">
@@ -20,7 +19,7 @@
                     <h3 class="card-title text-center">Pharmacy Alumni Association</h3>
                     <h5 class="card-text text-center">Membership Application</h5>
                     <br>
-                    <form method="POST" action="">
+                    <form method="POST" action="" enctype="multipart/form-data">
                       {% csrf_token %}
                         <div class="">
                             <h4>Personal Information</h4>
@@ -38,31 +37,36 @@
                         
                         <div class="row">
                             <div class="col">
+                              {{ userregisterform.full_name.label }}
                               {{ userregisterform.full_name }}
+                            </div>
+                            <div class="col">
+                              {{ userregisterform.profile_picture.label }}
+                              {{ userregisterform.profile_picture }}
                             </div>
                           </div>
                           <br>
 
                           <div class="row">
                             <div class="col">
-                              {{ userregisterform.b_pharm_roll_no.label }}
-                              {{ userregisterform.b_pharm_roll_no }}
+                              {{ userinfoform.b_pharm_roll_no.label }}
+                              {{ userinfoform.b_pharm_roll_no }}
                             </div>
                             <div class="col">
-                              {{ userregisterform.m_pharm_roll_no.label }}
-                              {{ userregisterform.m_pharm_roll_no }}
+                              {{ userinfoform.m_pharm_roll_no.label }}
+                              {{ userinfoform.m_pharm_roll_no }}
                               </div>
                           </div>
                           <br>
 
                           <div class="row">
                             <div class="col">
-                              {{ userregisterform.date_of_birth.label }}
-                              {{ userregisterform.date_of_birth }}
+                              {{ userinfoform.date_of_birth.label }}
+                              {{ userinfoform.date_of_birth }}
                             </div>
                             <div class="col">
-                              {{ userregisterform.blood_group.label }}
-                              {{ userregisterform.blood_group }}
+                              {{ userinfoform.blood_group.label }}
+                              {{ userinfoform.blood_group }}
                               </div>
                           </div>
                           <br>
@@ -85,24 +89,24 @@
 
                         <div class="row">
                             <div class="col">
-                              {{ userregisterform.name_of_spouse.label }}
-                              {{ userregisterform.name_of_spouse }}
+                              {{ userinfoform.name_of_spouse.label }}
+                              {{ userinfoform.name_of_spouse }}
                             </div>
                             <div class="col">
-                              {{ userregisterform.marriage_date.label }}
-                              {{ userregisterform.marriage_date }}
+                              {{ userinfoform.marriage_date.label }}
+                              {{ userinfoform.marriage_date }}
                               </div>
                           </div>
                           <br>
 
                           <div class="row">
                             <div class="col">
-                              {{ userregisterform.no_of_kids.label }}
-                              {{ userregisterform.no_of_kids }}
+                              {{ userinfoform.no_of_kids.label }}
+                              {{ userinfoform.no_of_kids }}
                             </div>
                             <div class="col">
-                              {{ userregisterform.hobbies.label }}
-                              {{ userregisterform.hobbies }}
+                              {{ userinfoform.hobbies.label }}
+                              {{ userinfoform.hobbies }}
                               </div>
                           </div>
                           <br>
@@ -111,6 +115,7 @@
                             <div class="col">
                               {{ userregisterform.password1.label }}
                               {{ userregisterform.password1 }}
+                              {{ userregisterform.password1.help_text|safe }}
                             </div>
                             <div class="col">
                               {{ userregisterform.password2.label }}
@@ -121,16 +126,16 @@
 
                           <div class="row">
                             <div class="col">
-                              {{ userregisterform.present_address.label }}
-                              {{ userregisterform.present_address }}
+                              {{ userinfoform.present_address.label }}
+                              {{ userinfoform.present_address }}
                             </div>
                           </div>
                           <br>
 
                           <div class="row">
                             <div class="col">
-                              {{ userregisterform.permanent_address.label }}
-                              {{ userregisterform.permanent_address }}
+                              {{ userinfoform.permanent_address.label }}
+                              {{ userinfoform.permanent_address }}
                             </div>
                           </div>
                           <br>
@@ -141,20 +146,20 @@
 
                           <div class="row">
                             <div class="col">
-                              {{ userregisterform.designation_and_department.label }}
-                              {{ userregisterform.designation_and_department }}
+                              {{ userinfoform.designation_and_department.label }}
+                              {{ userinfoform.designation_and_department }}
                             </div>
                             <div class="col">
-                              {{ userregisterform.organization.label }}
-                              {{ userregisterform.organization }}
+                              {{ userinfoform.organization.label }}
+                              {{ userinfoform.organization }}
                               </div>
                           </div>
                           <br>
 
                           <div class="row">
                             <div class="col">
-                              {{ userregisterform.address.label }}
-                              {{ userregisterform.address }}
+                              {{ userinfoform.organization_address.label }}
+                              {{ userinfoform.organization_address }}
                             </div>
                           </div>
                           <br>

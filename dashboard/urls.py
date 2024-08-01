@@ -3,5 +3,5 @@ from . import views
 
 urlpatterns = [
     path('', views.dashboardhome, name="dashboard"),
-    path('user-edit/<str:pk>/', views.userEdit, name="user-edit"),
+    path('admin-user-info/<str:pk>/', views.adminUserInfo, name="admin-user-info"),
 ]

@@ -1,0 +1,14 @@
+<nav class="navbar bg-body-tertiary">
+    <div class="container">
+      <a class="navbar-brand"></a>
+      <div class="">
+        {% if request.user.is_authenticated %}
+          <a href="{% url 'logout-admin' %}" class="btn btn-outline-danger">LogOut</a>
+        
+        {% else %}
+        <a href="{% url 'login' %}" class="btn btn-outline-secondary">User Login</a>
+        <a href="{% url 'admin-login' %}" class="btn btn-outline-danger">Admin/ Super Admin Login</a>
+        {% endif %}
+      </div>
+    </div>
+  </nav>

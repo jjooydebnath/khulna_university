@@ -33,6 +33,16 @@
             </div>
         </div>
 
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title text-center">Total Admin</h3>
+                    <hr>
+                    <h4 class="card-text text-center">{{ admincount }}</h4>
+                </div>
+            </div>
+        </div>
+
     </div>
     <br>
 
@@ -61,7 +71,7 @@
                             <td>{{ obj.user.email }}</td>
                             <td>{{ obj.membership_status }}</td>
                             <td>{{ obj.is_publish }}</td>
-                            <td><a href="{% url 'user-edit' obj.user.id %}" class="btn btn-info">View More</a></td>
+                            <td><a href="{% url 'admin-user-info' obj.user.id %}" class="btn btn-info">View More</a></td>
                           </tr>
                           
                         </tbody>

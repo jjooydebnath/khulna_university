@@ -7,8 +7,7 @@ from .models import User, UserRegistrationForm, AdminRegister
 class CreateUserForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['full_name', 'email', 'mobile_number', 'profile_picture', 'password1', 'password2',
-                ]
+        fields = ['full_name', 'email', 'mobile_number', 'profile_picture', 'password1', 'password2']
 
         labels = {
             'full_name': 'Full Name',

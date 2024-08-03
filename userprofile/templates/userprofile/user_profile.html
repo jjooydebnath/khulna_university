@@ -29,7 +29,7 @@
                         </div>
                         <div class="col">
                             <div class="text-end">
-                                <a href="#" class="btn btn-primary">Edit Account</a>
+                                <a href="{% url 'edit-user-profile' %}" class="btn btn-primary">Edit Account</a>
                             </div>
                         </div>
                     </div>
@@ -43,11 +43,11 @@
                           <div class="row">
                             <div class="col">
                               <label>B. Pharm(Roll No.): </label>
-                              {{ user.b_pharm_roll_no }}
+                              {{ users.b_pharm_roll_no }}
                             </div>
                             <div class="col">
                               <label>M. Pharm(Roll No.): </label>
-                              {{ user.m_pharm_roll_no }}
+                              {{ users.m_pharm_roll_no }}
                               </div>
                           </div>
                           <br>
@@ -55,11 +55,11 @@
                           <div class="row">
                             <div class="col">
                               <label>Date of Birth: </label>
-                              {{ user.date_of_birth }}
+                              {{ users.date_of_birth }}
                             </div>
                             <div class="col">
                               <label>Blood Group: </label>
-                              {{ user.blood_group }}
+                              {{ users.blood_group }}
                               </div>
                           </div>
                           <br>
@@ -95,11 +95,11 @@
                           <div class="row">
                             <div class="col">
                               <label>No of Kids: </label>
-                              {{ user.no_of_kids }}
+                              {{ users.no_of_kids }}
                             </div>
                             <div class="col">
                               <label>Hobbies: </label>
-                              {{ user.hobbies }}
+                              {{ users.hobbies }}
                               </div>
                           </div>
                           <br>
@@ -107,11 +107,11 @@
                           <div class="row">
                             <div class="col">
                               <label>Present Address: </label>
-                              {{ user.present_address }}
+                              {{ users.present_address }}
                             </div>
                             <div class="col">
                               <label>Permanent Address: </label>
-                              {{ user.permanent_address }}
+                              {{ users.permanent_address }}
                             </div>
                           </div>
                           <br>
@@ -123,19 +123,19 @@
                           <div class="row">
                             <div class="col">
                               <label>Designation and Department: </label>
-                              {{ user.designation_and_department }}
+                              {{ users.designation_and_department }}
                             </div>
                             <div class="col">
                               <label>Organization: </label>
-                              {{ user.organization }}
+                              {{ users.organization }}
                               </div>
                           </div>
                           <br>
   
                           <div class="row">
                             <div class="col">
-                              <label>Office Address: </label>
-                              {{ user.address }}
+                              <label>Organization Address: </label>
+                              {{ users.organization_address }}
                             </div>
                           </div>
                           <br>

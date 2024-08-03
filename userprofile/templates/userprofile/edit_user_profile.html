@@ -1,0 +1,168 @@
+{% extends 'userprofile/base.html' %}
+{% block content %}
+
+<div class="container">
+    <br>
+      <div class="">
+          <a href="{% url 'user-profile' user.id %}" class="btn btn-warning">back</a>
+      </div>
+      <br>
+  
+      <div class="row">
+          <div class="col">
+          </div>
+  
+          <div class="col">
+              <div class="card" style="width: 50rem;">
+                  
+                  <div class="container" style="margin: 15px 0 0 0;">
+                      <h3 class="card-title text-center">Edit Profile</h3>
+                      <br>
+                      <form method="POST" action="" enctype="multipart/form-data">
+                        {% csrf_token %}
+                          <div class="">
+                              <h4>Personal Information</h4>
+                          </div>
+                          
+                          <div class="row">
+                              <div class="col">
+                                {{ form.full_name.label }}
+                                {{ form.full_name }}
+                              </div>
+                              
+                            </div>
+                            <br>
+
+                            <div class="row">
+                                <div class="col">
+                                    {{ form.profile_picture.label }}
+                                    {{ form.profile_picture }}
+                                </div>
+                                <div class="col">
+
+                                </div>
+                                
+                            </div>
+                            <br>
+                            <div class="row">
+                              <div class="col">
+                                {{ addform.b_pharm_roll_no.label }}
+                                {{ addform.b_pharm_roll_no }}
+                              </div>
+                              <div class="col">
+                                {{ addform.m_pharm_roll_no.label }}
+                                {{ addform.m_pharm_roll_no }}
+                                </div>
+                            </div>
+                            <br>
+  
+                            <div class="row">
+                              <div class="col">
+                                {{ addform.date_of_birth.label }}
+                                {{ addform.date_of_birth }}
+                              </div>
+                              <div class="col">
+                                {{ addform.blood_group.label }}
+                                {{ addform.blood_group }}
+                                </div>
+                            </div>
+                            <br>
+  
+                          <div class="row">
+                              <div class="col">
+                                  <div class="form-group">
+                                    {{ form.email.label }}
+                                    {{ form.email }}
+                                  </div>
+                              </div>
+                              <div class="col">
+                                  <div class="form-group">
+                                    {{ form.mobile_number.label }}
+                                    {{ form.mobile_number }}
+                                  </div>
+                              </div>
+                          </div>
+                          <br>
+  
+                          <div class="row">
+                              <div class="col">
+                                {{ addform.name_of_spouse.label }}
+                                {{ addform.name_of_spouse }}
+                              </div>
+                              <div class="col">
+                                {{ addform.marriage_date.label }}
+                                {{ addform.marriage_date }}
+                                </div>
+                            </div>
+                            <br>
+  
+                            <div class="row">
+                              <div class="col">
+                                {{ addform.no_of_kids.label }}
+                                {{ addform.no_of_kids }}
+                              </div>
+                              <div class="col">
+                                {{ addform.hobbies.label }}
+                                {{ addform.hobbies }}
+                                </div>
+                            </div>
+                            <br>
+  
+                            <div class="row">
+                              <div class="col">
+                                {{ addform.present_address.label }}
+                                {{ addform.present_address }}
+                              </div>
+                            </div>
+                            <br>
+  
+                            <div class="row">
+                              <div class="col">
+                                {{ addform.permanent_address.label }}
+                                {{ addform.permanent_address }}
+                              </div>
+                            </div>
+                            <br>
+  
+                            <div class="">
+                              <h4>Professional Information</h4>
+                            </div>
+  
+                            <div class="row">
+                              <div class="col">
+                                {{ addform.designation_and_department.label }}
+                                {{ addform.designation_and_department }}
+                              </div>
+                              <div class="col">
+                                {{ addform.organization.label }}
+                                {{ addform.organization }}
+                                </div>
+                            </div>
+                            <br>
+  
+                            <div class="row">
+                              <div class="col">
+                                {{ addform.organization_address.label }}
+                                {{ addform.organization_address }}
+                              </div>
+                            </div>
+                            <br>
+  
+  
+                          <div class="">
+                              <button type="submit" class="btn btn-success">Save</button>
+                          </div>
+                          <br>
+                      </form>
+                  </div>
+              </div>
+              <br>
+          </div>
+  
+          <div class="col">
+  
+          </div>
+      </div>
+  </div>
+
+{% endblock %}

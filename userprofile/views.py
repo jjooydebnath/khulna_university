@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from accounts.models import User, UserRegistrationForm
 from accounts.forms import CreateUserForm, UserMemberShipForm
 
-from .forms import UserCvUploadForm
+from .forms import ProfileInfoEdit, UserCvUploadForm
 
 
 @login_required(login_url='login')

@@ -7,4 +7,4 @@ class CvUpload(models.Model):
     upload_cv = models.FileField(upload_to='cv', null=True, blank=True)
 
     def __str__(self):
-        return str(self.user.mobile_number)
+        return str(self.person.mobile_number)

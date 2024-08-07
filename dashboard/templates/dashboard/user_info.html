@@ -26,7 +26,8 @@
                               <h3>{{ userinfo.full_name.title }}</h3>
                           </div>
                       </div>
-                      <div class="col">
+                      <div class="col text-end">
+                        <a href="{% url 'payment-info' userinfo.id %}" class="btn btn-outline-info">View Payment Info</a>
                       </div>
                   </div>
                   

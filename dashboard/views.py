@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from accounts.forms import CreateUserForm, UserMemberShipForm, AddRegisterForm
-from accounts.models import User, UserRegistrationForm, AdminRegister
+from accounts.forms import CreateUserForm, UserMemberShipForm, AddRegisterForm, PaymentInformationForm
+from accounts.models import User, UserRegistrationForm, AdminRegister, PaymentInformation
 
 def dashboardhome(request):
     user = request.user
@@ -33,6 +33,17 @@ def adminUserInfo(request, pk):
         else:
             useradd_data = UserMemberShipForm(instance=useradd)
         context = {'useradd_data': useradd_data, 'userinfo': userinfo}
-        return render(request, 'dashboard/admin_user_info.html', context)
+        return render(request, 'dashboard/user_info.html', context)
+    else:
+        return render(request, 'dashboard/not_authrized.html')
+    
+
+def paymentInfo(request, pk):
+    user = request.user
+    users = User.objects.get(id=pk)
+    payinfo = PaymentInformation.objects.all()
+    if user.is_staff or user.is_superuser:
+        context = {'users': users, 'payinfo': payinfo}
+        return render(request, 'dashboard/payment_info.html', context)
     else:
         return render(request, 'dashboard/not_authrized.html')

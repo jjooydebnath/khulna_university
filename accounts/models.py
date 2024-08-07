@@ -57,7 +57,7 @@ class UserRegistrationForm(models.Model):
         ('Genarel', 'Genarel'),
         ('Associate', 'Assicuate')
     )
-    membership_status = models.CharField(max_length=200, null=True, choices=MEMBERSHIP_STATUS)
+    membership_status = models.CharField(max_length=200, null=True, blank=True, choices=MEMBERSHIP_STATUS)
     is_publish = models.BooleanField(('publish'), default=False, help_text=(
         'Designates whether this user should be treated as active. '
             'Unselect this instead of deleting accounts.'))
@@ -77,3 +77,28 @@ class AdminRegister(models.Model):
     
     def __str__(self):
         return str(self.user.mobile_number)
+    
+
+class PaymentInformation(models.Model):
+    person = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
+    PAYMENT_TYPE = (
+        ('new', 'New'),
+        ('renewal', 'Renewal')
+    )
+    payment_type = models.CharField(max_length=200, null=True, blank=True, choices=PAYMENT_TYPE)
+    enclosed_taka = models.CharField(max_length=10, null=True, blank=True)
+    in_word = models.CharField(max_length=100, null=True, blank=True)
+    payment_no = models.CharField(max_length=100, null=True, blank=True)
+    payment_date = models.CharField(max_length=10, null=True, blank=True)
+    PAYMENT_GETWAY = (
+        ('cash', 'Cash'),
+        ('demand_draft', 'Demand Draft'),
+        ('pay_order', 'Pay Order'),
+        ('online_pay', 'Online Pay')
+
+    )
+    payment_getway = models.CharField(max_length=200, null=True, blank=True, choices=PAYMENT_GETWAY)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return str(self.person.mobile_number)

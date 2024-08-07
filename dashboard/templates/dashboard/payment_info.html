@@ -1,0 +1,64 @@
+{% extends 'dashboard/base.html' %}
+{% block content %}
+<div class="container">
+  <br>
+  <div class="row">
+    <div class="col"></div>
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title text-center">Payment Information - {{ users.full_name|title }}</h3>
+          {% for obj in payinfo %}
+          SL: {{ forloop.counter }}
+
+          <div class="row">
+            <div class="col">
+              Payment Type: 
+              {{ obj.payment_type }}
+            </div>
+            <div class="col">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              Enclosed Taka: 
+              {{ obj.enclosed_taka }}
+            </div>
+            <div class="col">
+              In Word: 
+              {{ obj.in_word }}
+            </div>
+          </div>
+
+          <div class="row">
+          <div class="col">
+            Payment No : 
+            {{ obj.payment_no }}
+          </div>
+          <div class="col">
+            In Word: 
+            {{ obj.payment_date }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            Payment Getway:
+            {{ obj.payment_getway }}
+          </div>
+          <div class="col">
+            Date:
+            {{ obj.created_at }}
+          </div>
+        </div>
+        <br>
+        {% endfor %}
+
+        </div>
+      </div>
+    </div>
+    <div class="col"></div>
+
+  </div>
+</div>
+{% endblock %}

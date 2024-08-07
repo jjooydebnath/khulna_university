@@ -2,7 +2,7 @@ from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
-from .models import User, UserRegistrationForm, AdminRegister
+from .models import User, UserRegistrationForm, AdminRegister, PaymentInformation
 
 class CreateUserForm(UserCreationForm):
     class Meta:
@@ -111,3 +111,17 @@ class AddRegisterForm(ModelForm):
         labels = {
             'is_publish': 'Active'
         }
+class PaymentInformationForm(ModelForm):
+    class Meta:
+        model = PaymentInformation
+        fields = ['payment_type','enclosed_taka', 'in_word', 'payment_no', 'payment_getway', 'payment_date']
+
+    def __init__(self, *args, **kwargs):
+        super(PaymentInformationForm, self).__init__(*args, **kwargs)
+
+        self.fields['payment_type'].widget.attrs.update({'class':'form-control', 'placeholder': ''})
+        self.fields['enclosed_taka'].widget.attrs.update({'class':'form-control', 'placeholder': ''})
+        self.fields['in_word'].widget.attrs.update({'class':'form-control', 'placeholder': ''})
+        self.fields['payment_no'].widget.attrs.update({'class':'form-control', 'placeholder': ''})
+        self.fields['payment_date'].widget.attrs.update({'class':'form-control', 'placeholder': 'DD/MM/YYYY'})
+        self.fields['payment_getway'].widget.attrs.update({'class':'form-control', 'placeholder': ''})

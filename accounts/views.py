@@ -3,10 +3,11 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
 
-from .forms import CreateUserForm, UserMemberShipForm, StafRegistration, AddRegisterForm
-from .models import User, UserRegistrationForm
+from .forms import CreateUserForm, UserMemberShipForm, StafRegistration, AddRegisterForm, PaymentInformationForm
+from .models import User, UserRegistrationForm, PaymentInformation
+from .decorators import unauthenticated_user
 
-
+@unauthenticated_user
 def loginView(request):
     if request.method == "POST":
         user = authenticate(
@@ -29,6 +30,7 @@ def loginView(request):
     context = {}
     return render(request, 'accounts/login.html', context)
 
+@unauthenticated_user
 def userRegistration(request):
     userinfoform = UserMemberShipForm()
     userregisterform = CreateUserForm()
@@ -46,6 +48,7 @@ def userRegistration(request):
     context = {'userregisterform':userregisterform, 'userinfoform': userinfoform}
     return render(request, 'accounts/user_registration.html', context)
 
+@unauthenticated_user
 def adminLogin(request):
     if request.method == "POST":
         user = authenticate(
@@ -88,6 +91,20 @@ def stafRegistration(request):
 
     context = {'form':form, 'addform':addform}
     return render(request, 'accounts/staf_registration.html', context)
+
+def paymentInformation(request):
+    user = request.user
+    form = PaymentInformationForm(request.POST)
+    if request.method == "POST":
+        form = PaymentInformationForm(request.POST)
+        if form.is_valid():
+            forms = form.save(commit=False)
+            forms.person = user
+            forms.save()
+            messages.info(request, 'successfully Information update')
+            return redirect('user-home')
+    context = {'form': form}
+    return render(request, 'accounts/payment_information.html', context)
 
 def logoutUser(request):
     logout(request)

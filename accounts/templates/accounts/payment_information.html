@@ -1,0 +1,31 @@
+{% extends 'accounts/base.html' %}
+{% block content %}
+<div class="container">
+    <br>
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-md-7">
+            <div class="card">
+                <div class="card-body">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+
+                        <div class="text-center">
+                            <h3>Payment Information Update</h3>
+                            <p style="color: red;">If you have already filled this form then you don't need to fill it now. Talk to the teacher or authority.</p>
+                        </div>
+
+                        {{ form }}
+                        <br>
+
+                        <button class="btn btn-success" type="submit">Submit</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+    <br>
+</div>
+{% endblock %}

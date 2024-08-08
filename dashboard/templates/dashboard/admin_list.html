@@ -1,0 +1,46 @@
+{% extends 'dashboard/base.html' %}
+{% block content %}
+<br>
+<div class="container">
+    <a class="btn btn-warning" href="{% url 'dashboard' %}">back</a>
+    <br>
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">SL</th>
+                            <th scope="col">Profile</th>
+                            <th scope="col">Full Name</th>
+                            <th scope="col">Mobile Number</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">SuperUser Status</th>
+                            <th scope="col">Staff Status</th>
+                            <th scope="col">Active/Deactive</th>
+                          </tr>
+                        </thead>
+                        {% for obj in admins %}
+                        <tbody>
+                          <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <th><img style="width: 60px; border-radius: 50%;" src="{{ obj.user.profile_picture.url }}"></th>
+                            <td>{{ obj.user.full_name }}</td>
+                            <td>{{ obj.user.mobile_number }}</td>
+                            <td>{{ obj.user.email }}</td>
+                            <td>{{ obj.user.is_superuser }}</td>
+                            <td>{{ obj.user.is_staff }}</td>
+                            <td>{{ obj.is_publish }}</td>
+                            
+                          </tr>
+                          
+                        </tbody>
+                        {% endfor %}
+                      </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

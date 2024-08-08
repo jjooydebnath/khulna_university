@@ -47,3 +47,12 @@ def paymentInfo(request, pk):
         return render(request, 'dashboard/payment_info.html', context)
     else:
         return render(request, 'dashboard/not_authrized.html')
+    
+def adminList(request):
+    user = request.user
+    admins = AdminRegister.objects.all()
+    if user.is_staff or user.is_superuser:
+        context = {'admins': admins}
+        return render(request, 'dashboard/admin_list.html', context)
+    else:
+        return render(request, 'dashboard/not_authrized.html')

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile PDF</title>
+    <style>
+        @page{
+            size: 7in 9.25in;
+            margin: 27mm 16mm 27mm 16mm;
+        }
+    </style>
+</head>
+<body>
+    <h1>Profile</h1>
+    <img style="width: 100px;" src="static/uploads/{{ user.profile_picture }}">
+    <p>Name: {{ user.full_name }}</p>
+    <p>Mobile Number: {{ user.mobile_number }}</p>
+    <p>Email: {{ user.email }}</p>
+    <p>B. Pharm(Roll No.): {{ user_profile.b_pharm_roll_no }}</p>
+    </body>
+</html>

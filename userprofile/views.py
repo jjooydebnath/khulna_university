@@ -1,10 +1,12 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
-# import io
-# import xhtml2pdf.pisa as pisa
-# from django.template.loader import get_template
+import os
+from django.http import HttpResponse
+from django.template.loader import get_template
+from xhtml2pdf import pisa 
+
 
 from accounts.models import User, UserRegistrationForm
 from accounts.forms import CreateUserForm, UserMemberShipForm
@@ -75,17 +77,42 @@ def cvUpload(request):
     else:
         return render(request, 'base/not-active.html')
 
+def profile_pdf(request, pk):
+    # Retrieve user profile data
+    user =  User.objects.get(id=pk)
+    user_profile = user.userregistrationform
 
-# def generate_pdf(request, pk):
-#     user = request.user
-#     users = User.objects.get(id=pk)
-#     otherinfo = UserRegistrationForm.objects.get(instance=users)
-#     context ={
-#         'users': users,
-#         'otherinfo' : otherinfo
-#     }
-#     template_path = 'userprofile/profile_pdf.html'  # Replace with your template path
-#     template = get_template(template_path)
-#     html = template.render(context)
-#     response = io.BytesIO()
-#     pdf = pisa.CreatePDF(html, dest=response)
+    # Create context for the template
+    context = {
+        'full_name': user.full_name,
+        'email': user.email,
+        'mobile_number': user.mobile_number,
+        'profile_picture': user.profile_picture,
+        'b_pharm_roll_no': user_profile.b_pharm_roll_no,
+        'm_pharm_roll_no': user_profile.m_pharm_roll_no,
+        'date_of_birth': user_profile.date_of_birth,
+        'blood_group': user_profile.blood_group,
+        'name_of_spouse': user_profile.name_of_spouse,
+        'marriage_date': user_profile.marriage_date,
+        'no_of_kids': user_profile.no_of_kids,
+        'hobbies': user_profile.hobbies,
+        'present_address': user_profile.present_address,
+        'permanent_address': user_profile.permanent_address,
+        'designation_and_department': user_profile.designation_and_department,
+        'organization': user_profile.organization,
+        'organization_address': user_profile.organization_address,
+        'membership_status': user_profile.membership_status,
+
+    }
+
+    # Render the template to HTML
+    template_path = 'userprofile/profile_pdf.html'
+    html = render(request, template_path, context).content.decode('utf-8')
+
+    # Create a PDF
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="profile.pdf"'
+    pisa_status = pisa.CreatePDF(html, dest=response)
+    if pisa_status.err:
+        return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response 

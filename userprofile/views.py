@@ -12,6 +12,7 @@ from accounts.models import User, UserRegistrationForm
 from accounts.forms import CreateUserForm, UserMemberShipForm
 
 from .forms import ProfileInfoEdit, AddProfileEdit, UserCvUploadForm
+from .models import CvUpload
 
 
 @login_required(login_url='login')
@@ -115,4 +116,10 @@ def profile_pdf(request, pk):
     pisa_status = pisa.CreatePDF(html, dest=response)
     if pisa_status.err:
         return HttpResponse('We had some errors <pre>' + html + '</pre>')
-    return response 
+    return response
+
+
+def usersInfo(request):
+    cvs = CvUpload.objects.all()
+    context = {'cvs': cvs}
+    return render(request, 'userprofile/users_info.html', context)

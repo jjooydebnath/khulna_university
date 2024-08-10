@@ -7,4 +7,5 @@ urlpatterns = [
     path('edit-user-profile/', views.editUserProfile, name="edit-user-profile"),
     path('cv-upload/', views.cvUpload, name="cv-upload"),
     path('profile-pdf/<str:pk>/', views.profile_pdf, name="profile-pdf"),
+    path('users-info/', views.usersInfo, name="users-info"),
 ]

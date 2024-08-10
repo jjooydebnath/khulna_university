@@ -6,6 +6,20 @@
 
 <br>
 <div class="container">
+    {% if request.user.is_authenticated %}
+    <div class="row">
+        <div class="col">
+            {% if request.user.userregistrationform.is_publish is True %}
+            <a class="btn btn-primary" href="{% url 'user-home' %}">Dashboard</a>
+            <a class="btn btn-primary" href="{% url 'cv-upload' %}">Cv Upload</a>
+            {% endif %}
+            {% if request.user.is_staff or request.user.is_superuser is True %}
+            <a class="btn btn-primary" href="{% url 'dashboard' %}">Dashboard</a>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+    <br>
     <div class="card text-center">
         <div class="row">
             <div class="card-body">

@@ -1,5 +1,6 @@
 {% extends 'userprofile/base.html' %}
 {% load static %}
+{% block title %} Profile {% endblock %}
 {% block content %}
 <div class="container">
     <br>
@@ -83,11 +84,11 @@
                         <div class="row">
                             <div class="col">
                               <label>Wife Name: </label>
-                              {{ user.name_of_spouse }}
+                              {{ users.name_of_spouse }}
                             </div>
                             <div class="col">
                               <label>Marriage Date: </label>
-                              {{ user.marriage_date }}
+                              {{ users.marriage_date }}
                               </div>
                           </div>
                           <br>

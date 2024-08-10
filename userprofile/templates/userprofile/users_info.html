@@ -1,0 +1,39 @@
+{% extends 'userprofile/base.html' %}
+{% block title %} All Users Cv {% endblock %}
+{% block content %}
+<br>
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">SL</th>
+                    <th scope="col">Full Name</th>
+                    <th scope="col">Mobile Number</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">More</td>
+                  </tr>
+                </thead>
+                
+                {% for obj in cvs %}
+                
+
+                <tbody>
+                  <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ obj.person.full_name }}</td>
+                    <td>{{ obj.person.mobile_number }}</td>
+                    <td>{{ obj.person.email }}</td>
+                    <td><a href="{{ obj.upload_cv.url }}" class="btn btn-info">Download CV</a></td>
+                  </tr>
+                  
+                </tbody>
+                {% endfor %}
+              </table>
+            
+        </div>
+    </div>
+</div>
+{% endblock %}

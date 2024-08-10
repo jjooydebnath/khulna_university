@@ -102,3 +102,4 @@ class PaymentInformation(models.Model):
 
     def __str__(self):
         return str(self.person.mobile_number)
+    

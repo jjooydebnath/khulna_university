@@ -5,16 +5,33 @@
     <style>
         @page{
             size: 7in 9.25in;
-            margin: 27mm 16mm 27mm 16mm;
+            margin: 30px, 50px;
         }
     </style>
 </head>
 <body>
-    <h1>Profile</h1>
+    <h1>Profile Info</h1>
+    <p>Account Type: {{ membership_status }}</p>
     <img style="width: 100px;" src="static/uploads/{{ user.profile_picture }}">
-    <p>Name: {{ user.full_name }}</p>
-    <p>Mobile Number: {{ user.mobile_number }}</p>
-    <p>Email: {{ user.email }}</p>
-    <p>B. Pharm(Roll No.): {{ user_profile.b_pharm_roll_no }}</p>
+    <h2>Personal Information</h2>
+    <hr>
+    <p>Name: {{ full_name|title }}</p>
+    <p>Mobile Number: {{ mobile_number }}</p>
+    <p>Email: {{ email }}</p>
+    <p>B. Pharm(Roll No.): {{ b_pharm_roll_no }}</p>
+    <p>M. Pharm(Roll No.): {{ m_pharm_roll_no }}</p>
+    <p>Date Of Birth: {{ date_of_birth }}</p>
+    <p>Blood Group: {{ blood_group }}</p>
+    <p>Name of Spouse: {{ name_of_spouse }}</p>
+    <p>Marriage Date: {{ marriage_date }}</p>
+    <p>No. of Kids: {{ no_of_kids }}</p>
+    <p>Hobbies: {{ hobbies }}</p>
+    <p>Present Address: {{ present_address }}</p>
+    <p>Permanent Address: {{ permanent_address }}</p>
+    <h2>Profetional Information</h2>
+    <hr>
+    <p>Designation & Department: {{ designation_and_department }}</p>
+    <p>Organization: {{ organization }}</p>
+    <p>Address: {{ organization_address }}</p>
     </body>
 </html>

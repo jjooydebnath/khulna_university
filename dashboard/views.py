@@ -1,4 +1,8 @@
 from django.shortcuts import render, redirect
+from django.core.mail import send_mail
+from django.conf import settings
+from django.shortcuts import get_object_or_404
+
 from accounts.forms import CreateUserForm, UserMemberShipForm, AddRegisterForm, PaymentInformationForm
 from accounts.models import User, UserRegistrationForm, AdminRegister, PaymentInformation
 
@@ -51,8 +55,28 @@ def paymentInfo(request, pk):
 def adminList(request):
     user = request.user
     admins = AdminRegister.objects.all()
+    
     if user.is_staff or user.is_superuser:
         context = {'admins': admins}
         return render(request, 'dashboard/admin_list.html', context)
     else:
         return render(request, 'dashboard/not_authrized.html')
+    
+def send_email(request, pk):
+    user = get_object_or_404(User, id=pk)
+    if request.method == 'POST':
+
+        # Create the email subject and message
+        subject = request.POST['subject']
+        message = request.POST['message']
+        
+        # Send the email
+        send_mail(
+            subject,
+            message,
+            settings.DEFAULT_FROM_EMAIL,
+            [user.email],
+            fail_silently=False,
+        )
+        return redirect('admin-list')
+    return render(request, 'dashboard/email_sent.html')

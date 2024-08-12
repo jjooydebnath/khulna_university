@@ -1,5 +1,7 @@
 from email.policy import default
 from django.db import models
+from model_utils import FieldTracker
+from django.utils import timezone
 
 
 from django.contrib.auth.models import AbstractUser
@@ -62,8 +64,9 @@ class UserRegistrationForm(models.Model):
         'Designates whether this user should be treated as active. '
             'Unselect this instead of deleting accounts.'))
     
+    tracker = FieldTracker(fields=['is_publish'])
+    end_time = models.DateTimeField(null=True, blank=True)
 
-    
 
     def __str__(self):
         return str(self.user.mobile_number)

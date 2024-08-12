@@ -20,6 +20,7 @@
                             <th scope="col">SuperUser Status</th>
                             <th scope="col">Staff Status</th>
                             <th scope="col">Active/Deactive</th>
+                            <th scope="col"></th>
                           </tr>
                         </thead>
                         {% for obj in admins %}
@@ -33,6 +34,7 @@
                             <td>{{ obj.user.is_superuser }}</td>
                             <td>{{ obj.user.is_staff }}</td>
                             <td>{{ obj.is_publish }}</td>
+                            <td><a href="{% url 'send-mail' obj.user.id %}" class="btn btn-primary">Send Mail</a></td>
                             
                           </tr>
                           

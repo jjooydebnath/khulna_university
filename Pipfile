@@ -8,6 +8,9 @@ django = "*"
 pillow = "*"
 xhtml2pdf = "*"
 django-model-utils = "*"
+celery = "*"
+redis = "*"
+django-celery-beat = "*"
 
 [dev-packages]
 

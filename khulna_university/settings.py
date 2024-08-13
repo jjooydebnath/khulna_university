@@ -45,6 +45,9 @@ INSTALLED_APPS = [
     'base.apps.BaseConfig',
     'dashboard.apps.DashboardConfig',
     'userprofile.apps.UserprofileConfig',
+
+    'django_celery_beat',
+
 ]
 
 MIDDLEWARE = [
@@ -156,3 +159,6 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'joy91740@gmail.com'
 EMAIL_HOST_PASSWORD = 'rzhcmogkvahswptn'
 DEFAULT_FROM_EMAIL = 'your-email@example.com'
+
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'

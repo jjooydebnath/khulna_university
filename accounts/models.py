@@ -1,7 +1,9 @@
 from email.policy import default
 from django.db import models
 from model_utils import FieldTracker
+
 from django.utils import timezone
+from datetime import timedelta
 
 
 from django.contrib.auth.models import AbstractUser
@@ -65,12 +67,28 @@ class UserRegistrationForm(models.Model):
             'Unselect this instead of deleting accounts.'))
     
     tracker = FieldTracker(fields=['is_publish'])
-    end_time = models.DateTimeField(null=True, blank=True)
+    status_set_at = models.DateTimeField(null=True, blank=True)
+    status_duration = models.DurationField(default=timedelta(hours=1))  # Example: 1 hour
 
+    def activate(self):
+        self.is_publish = True
+        self.status_set_at = timezone.now()
+        self.save()
+
+    def deactivate(self):
+        self.is_publish = False
+        self.status_set_at = None
+        self.save()
+
+    def is_status_expired(self):
+        if not self.is_publish or not self.status_set_at:
+            return False
+        expiration_time = self.status_set_at + self.status_duration
+        return timezone.now() > expiration_time
 
     def __str__(self):
         return str(self.user.mobile_number)
-    
+
 
 class AdminRegister(models.Model):
     user = models.OneToOneField(User, null=True, blank=True, on_delete= models.CASCADE)
@@ -78,8 +96,12 @@ class AdminRegister(models.Model):
         'Designates whether this user should be treated as active. '
             'Unselect this instead of deleting accounts.'))
     
+    
     def __str__(self):
         return str(self.user.mobile_number)
+    
+    
+
     
 
 class PaymentInformation(models.Model):
@@ -105,4 +127,3 @@ class PaymentInformation(models.Model):
 
     def __str__(self):
         return str(self.person.mobile_number)
-    

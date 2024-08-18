@@ -1,94 +1,86 @@
 {% extends 'dashboard/base.html' %}
-{% block title %} Dashboard {% endblock %}
 {% block content %}
-<br>
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <div class="card">
-                <div class="card-body">
-                    <h3 class="card-title text-center">Total Users</h3>
-                    <hr>
-                    <h4 class="card-text text-center">{{ users.count }}</h4>
+
+<main class="content">
+    <div class="container-fluid p-0">
+
+        <h1 class="h3 mb-3"><strong>Analytics</strong> Dashboard</h1>
+
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class=" card-title text-center">Total Users</h1>
+                        <hr>
+                        <h4 class="card-text text-center">{{ users.count }}</h4>
+
+
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div class="col">
-            <div class="card">
-                <div class="card-body">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
                     <h3 class="card-title text-center">Total Activate</h3>
                     <hr>
                     <h4 class="card-text text-center">{{ activecount }}</h4>
+                        
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div class="col">
-            <div class="card">
-                <div class="card-body">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
                     <h3 class="card-title text-center">Total Deactivate</h3>
                     <hr>
                     <h4 class="card-text text-center">{{ dactivecount }}</h4>
+                        
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="col">
-            <div class="card">
-                <div class="card-body">
-                    <h3 class="card-title text-center">Total Admin</h3>
-                    <hr>
-                    <h4 class="card-text text-center">{{ admincount }}</h4>
+
+            <div class="row">
+                <div class="col">
+                    <div class="card flex-fill">
+                        <div class="card-header">
+
+                            <h5 class="card-title mb-0">User List</h5>
+                        </div>
+                        <table class="table table-hover my-0">
+                            <thead>
+                                <tr>
+                                    <th>SL</th>
+                                    <th>Name</th>
+                                    <th class="d-none d-xl-table-cell">Mobile Number</th>
+                                    <th class="d-none d-xl-table-cell">Email Address</th>
+                                    <th>Membership Type</th>
+                                    <th class="d-none d-md-table-cell">Status</th>
+                                    <th class=""></th>
+                                </tr>
+                            </thead>
+                            {% for obj in users %}
+                            <tbody>
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ obj.user.full_name }}</td>
+                                    <td class="d-none d-xl-table-cell">{{ obj.user.mobile_number }}</td>
+                                    <td class="d-none d-xl-table-cell">{{ obj.user.email }}</td>
+                                    <td>{{ obj.membership_status }}</td>
+                                    {% if obj.is_publish is True %}
+                                        <td><span class="badge bg-success">Active</span></td>
+                                    {% else %}
+                                        <td><span class="badge bg-danger">Deactive</span></td>
+                                    {% endif %}
+                                    <td class=""><a href="{% url 'admin-user-info' obj.user.id %}" class="btn btn-info">More</a></td>
+                                </tr>
+                            </tbody>
+                            {% endfor %}
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
 
     </div>
-    <br>
-
-    <div class="row">
-        <div class="col">
-            <a href="{% url 'admin-list' %}" class="btn btn-primary">Staf List</a>
-        </div>
-    </div>
-    <br>
-
-    <div class="row">
-        <div class="col">
-            <div class="card">
-                <div class="card-body">
-                    <table class="table">
-                        <thead>
-                          <tr>
-                            <th scope="col">SL</th>
-                            <th scope="col">Full Name</th>
-                            <th scope="col">Mobile Number</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Member Type</th>
-                            <th scope="col">Active/Deactive</th>
-                            <th scope="col">More</td>
-                          </tr>
-                        </thead>
-                        {% for obj in users %}
-                        <tbody>
-                          <tr>
-                            <th scope="row">{{ forloop.counter }}</th>
-                            <td>{{ obj.user.full_name }}</td>
-                            <td>{{ obj.user.mobile_number }}</td>
-                            <td>{{ obj.user.email }}</td>
-                            <td>{{ obj.membership_status }}</td>
-                            <td>{{ obj.is_publish }}</td>
-                            <td><a href="{% url 'admin-user-info' obj.user.id %}" class="btn btn-info">View More</a></td>
-                          </tr>
-                          
-                        </tbody>
-                        {% endfor %}
-                      </table>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
+</main>
 {% endblock %}

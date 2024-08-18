@@ -1,7 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.core.mail import send_mail
 from django.conf import settings
-from django.shortcuts import get_object_or_404
+from django.utils import timezone
 
 from accounts.forms import CreateUserForm, UserMemberShipForm, AddRegisterForm, PaymentInformationForm
 from accounts.models import User, UserRegistrationForm, AdminRegister, PaymentInformation
@@ -26,17 +26,8 @@ def adminUserInfo(request, pk):
     user = request.user
     userinfo = User.objects.get(id=pk)
     if user.is_staff or user.is_superuser:
-        users = User.objects.get(id=pk)
-        useradd = users.userregistrationform
-
-        if request.method == 'POST':
-            useradd_data = UserMemberShipForm(request.POST, instance=useradd)
-            if useradd_data.is_valid():
-                useradd_data.save()
-                return redirect('dashboard')
-        else:
-            useradd_data = UserMemberShipForm(instance=useradd)
-        context = {'useradd_data': useradd_data, 'userinfo': userinfo}
+        useradd_data = get_object_or_404(UserRegistrationForm, user=userinfo)
+        context = {'useradd_data': useradd_data, 'userinfo': userinfo }
         return render(request, 'dashboard/user_info.html', context)
     else:
         return render(request, 'dashboard/not_authrized.html')

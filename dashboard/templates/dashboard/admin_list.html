@@ -1,9 +1,12 @@
 {% extends 'dashboard/base.html' %}
 {% block title %} Staff Or Admin List {% endblock %}
 {% block content %}
-<br>
+
 <div class="container">
+  <br>
+  <div class="">
     <a class="btn btn-warning" href="{% url 'dashboard' %}">back</a>
+  </div>
     <br>
     <div class="row">
         <div class="col">
@@ -17,8 +20,8 @@
                             <th scope="col">Full Name</th>
                             <th scope="col">Mobile Number</th>
                             <th scope="col">Email</th>
-                            <th scope="col">SuperUser Status</th>
-                            <th scope="col">Staff Status</th>
+                            <th scope="col">Super User</th>
+                            <th scope="col">Staff</th>
                             <th scope="col">Active/Deactive</th>
                             <th scope="col"></th>
                           </tr>
@@ -31,9 +34,21 @@
                             <td>{{ obj.user.full_name }}</td>
                             <td>{{ obj.user.mobile_number }}</td>
                             <td>{{ obj.user.email }}</td>
-                            <td>{{ obj.user.is_superuser }}</td>
-                            <td>{{ obj.user.is_staff }}</td>
-                            <td>{{ obj.is_publish }}</td>
+                            {% if obj.user.is_superuser is True %}
+                              <td><span class="badge bg-success">Yes</span></td>
+                            {% else %}
+                              <td><span class="badge bg-danger">No</span></td>
+                            {% endif %}
+                            {% if obj.user.is_staff is True %}
+                              <td><span class="badge bg-success">Yes</span></td>
+                            {% else %}
+                              <td><span class="badge bg-danger">No</span></td>
+                            {% endif %}
+                            {% if obj.is_publish is True %}
+                              <td><span class="badge bg-success">Active</span></td>
+                            {% else %}
+                              <td><span class="badge bg-danger">Deactive</span></td>
+                            {% endif %}
                             <td><a href="{% url 'send-mail' obj.user.id %}" class="btn btn-primary">Send Mail</a></td>
                             
                           </tr>

@@ -46,7 +46,9 @@ INSTALLED_APPS = [
     'dashboard.apps.DashboardConfig',
     'userprofile.apps.UserprofileConfig',
 
+    # 3rd Party install
     'django_celery_beat',
+    'django_celery_results',
 
 ]
 
@@ -150,15 +152,33 @@ MESSAGE_TAGS = {
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-#SMTP Configuration
-
+# SMTP Configuration
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'joy91740@gmail.com'
 EMAIL_HOST_PASSWORD = 'rzhcmogkvahswptn'
-DEFAULT_FROM_EMAIL = 'your-email@example.com'
+DEFAULT_FROM_EMAIL = 'joy91740@gmail.com'
 
-CELERY_BROKER_URL = 'redis://localhost:6379/0'
-CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+
+# celery Configuration
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'  # or your desired broker URL
+CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379/0'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Asia/Dhaka'
+
+# Celery Beat settings
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+
+from celery import Celery
+from celery.schedules import crontab
+
+CELERY_BEAT_SCHEDULE = {
+    'auto-deactivate-users': {
+        'task': 'accounts.tasks.auto_deactivate_users_task',
+        'schedule': crontab(minute=0, hour=12),  # Runs daily at midnight
+    },
+}

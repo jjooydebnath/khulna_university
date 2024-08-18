@@ -1,6 +1,6 @@
 from celery import shared_task
-from django.core.management import call_command
+from .views import auto_deactivate_users
 
 @shared_task
-def reset_inactive_statuses_task():
-    call_command('reset_inactive_statuses')
+def auto_deactivate_users_task():
+    auto_deactivate_users()

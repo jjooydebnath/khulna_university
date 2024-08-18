@@ -8,4 +8,6 @@ urlpatterns = [
     path('admin-list/', views.adminList, name="admin-list"),
 
     path('send-mail/<str:pk>/', views.send_email, name="send-mail"),
+
+
 ]

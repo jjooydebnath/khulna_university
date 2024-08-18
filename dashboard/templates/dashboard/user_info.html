@@ -157,14 +157,13 @@
 
                         <div class="row">
                           <div class="col">
-                            {{ useradd_data.is_publish.label }}
-                            {{ useradd_data.is_publish }}
-                          </div>
-                        </div>
-                        <br>
+                            {% if useradd_data.is_publish %}
+                              <a href="{% url 'deactivate_user' useradd_data.id %}" class="btn btn-warning">Deactivate</a>
+                            {% else %}
+                              <a href="{% url 'activate_user' useradd_data.id %}" class="btn btn-success">Activate</a>
+                            {% endif %}
 
-                        <div class="">
-                          <button type="submit" class="btn btn-success">Submit</button>
+                          </div>
                         </div>
                         <br>
                   </form>

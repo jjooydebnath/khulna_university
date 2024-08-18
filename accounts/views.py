@@ -1,10 +1,15 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.utils import timezone
+from datetime import timedelta
+from django.conf import settings
+from django.core.mail import send_mail
+from celery import shared_task
 
 
 from .forms import CreateUserForm, UserMemberShipForm, StafRegistration, AddRegisterForm, PaymentInformationForm
-from .models import User, UserRegistrationForm, PaymentInformation
+from .models import User, UserRegistrationForm, PaymentInformation, AdminRegister
 from .decorators import unauthenticated_user
 
 @unauthenticated_user
@@ -42,6 +47,19 @@ def userRegistration(request):
             userinfoform = userinfoform.save(commit=False)
             userinfoform.user = user
             userinfoform.save()
+
+            users = AdminRegister.objects.filter(is_publish=True)
+            subject = f'New User Registered: {user.full_name}'
+            message = f'''Dear Sir/Madam,\n 
+            A new User is Created please Check.\n
+            Full Name: {user.full_name}\n
+            Mobile Number: {user.mobile_number}\n
+            Email: {user.email}\n
+            Membership Status: {user.userregistrationform.membership_status}
+            '''
+            for adminemail in users:
+                admin_email = adminemail.user.email
+                send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [admin_email])
 
             messages.success(request, 'Account was created for' + " " + user.full_name)
             return redirect('login')
@@ -105,6 +123,29 @@ def paymentInformation(request):
             return redirect('user-home')
     context = {'form': form}
     return render(request, 'accounts/payment_information.html', context)
+
+# Set the time limit for the active status
+ACTIVE_DURATION = timedelta(hours=1)
+
+def activate_user(request, pk):
+    user = get_object_or_404(UserRegistrationForm, id=pk)
+    user.is_publish = True
+    user.last_activated = timezone.now()
+    user.save()
+    return redirect('dashboard')
+
+def deactivate_user(request, pk):
+    user = get_object_or_404(UserRegistrationForm, id=pk)
+    user.is_publish = False
+    user.save()
+    return redirect('dashboard')
+
+@shared_task
+def auto_deactivate_users():
+    # Automatically deactivate users whose active period has expired
+    expired_users = UserRegistrationForm.objects.filter(is_publish=True, last_activated__lte=timezone.now() - ACTIVE_DURATION)
+    expired_users.update(is_publish=False)
+
 
 def logoutUser(request):
     logout(request)

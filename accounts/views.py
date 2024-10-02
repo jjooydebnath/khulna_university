@@ -124,9 +124,6 @@ def paymentInformation(request):
     context = {'form': form}
     return render(request, 'accounts/payment_information.html', context)
 
-# Set the time limit for the active status
-ACTIVE_DURATION = timedelta(hours=1)
-
 def activate_user(request, pk):
     user = get_object_or_404(UserRegistrationForm, id=pk)
     user.is_publish = True
@@ -140,6 +137,9 @@ def deactivate_user(request, pk):
     user.save()
     return redirect('dashboard')
 
+
+# Set the time limit for the active status
+ACTIVE_DURATION = timedelta(hours=1)
 @shared_task
 def auto_deactivate_users():
     # Automatically deactivate users whose active period has expired

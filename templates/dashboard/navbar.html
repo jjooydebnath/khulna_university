@@ -37,7 +37,7 @@
             <img src="{{ request.user.profile_picture.url }}" class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span class="text-dark">{{ request.user.full_name }}</span></a>
                         <div class="dropdown-menu dropdown-menu-end">
                             <a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
-                            <a class="dropdown-item" href="#">Log out</a>
+                            <a class="dropdown-item" href="{% url 'logout-admin' %}">Log out</a>
                         </div>
                     </li>
                 </ul>

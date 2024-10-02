@@ -20,17 +20,17 @@ def debug_task(self):
     print(f'Request: {self.request!r}')
 
 
-@app.on_after_configure.connect
-def setup_periodic_tasks(sender, **kwargs):
-    from django_celery_beat.models import PeriodicTask, IntervalSchedule
-    from datetime import timedelta
-    schedule, created = IntervalSchedule.objects.get_or_create(
-        every=10,
-        period=IntervalSchedule.MINUTES,
-        #period=IntervalSchedule.HOURS,
-    )
-    PeriodicTask.objects.get_or_create(
-        interval=schedule,
-        name='Reset inactive statuses',
-        task='accounts.tasks.auto_deactivate_users_task',
-    )
+# @app.on_after_configure.connect
+# def setup_periodic_tasks(sender, **kwargs):
+#     from django_celery_beat.models import PeriodicTask, IntervalSchedule
+#     from datetime import timedelta
+#     schedule, created = IntervalSchedule.objects.get_or_create(
+#         every=10,
+#         period=IntervalSchedule.MINUTES,
+#         #period=IntervalSchedule.HOURS,
+#     )
+#     PeriodicTask.objects.get_or_create(
+#         interval=schedule,
+#         name='Reset inactive statuses',
+#         task='accounts.tasks.auto_deactivate_users_task',
+#     )

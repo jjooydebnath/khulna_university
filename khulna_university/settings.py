@@ -179,6 +179,6 @@ from celery.schedules import crontab
 CELERY_BEAT_SCHEDULE = {
     'auto-deactivate-users': {
         'task': 'accounts.tasks.auto_deactivate_users_task',
-        'schedule': crontab(minute=0, hour=12),  # Runs daily at midnight
+        'schedule': crontab(minute='*/10'),  # Runs every 10 minutes
     },
 }
